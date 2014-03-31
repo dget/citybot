@@ -14,10 +14,10 @@ answer_dict =   {
 def hello_monkey():
     """Respond to incoming calls with a simple text message."""
 
-    rcv_msg = request.values.get('Body', None)
+    rcv_msg = request.values.get('Body', None).lower()
     resp = twilio.twiml.Response()
     resp_msg = "Sorry, I don't have any information!"
-    if rcv_msg.lower() in answer_dict:
+    if rcv_msg in answer_dict:
         resp_msg = answer_dict[rcv_msg]
 
     resp.message(resp_msg)
