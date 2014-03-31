@@ -1,5 +1,4 @@
-# Download the twilio-python library from http://twilio.com/docs/libraries
-from flask import Flask, request, redirect
+from flask import Flask, request
 import twilio.twiml
 
 app = Flask(__name__)
@@ -10,8 +9,8 @@ answer_dict =   {
                     "set my alarm"  :   "Sorry, I'm not Siri"
                 };
 
-@app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
+@app.route("/", methods=['GET'])
+def respond_to_question():
     """Respond to incoming calls with a simple text message."""
 
     rcv_msg = request.values.get('Body', None).lower()
@@ -25,4 +24,3 @@ def hello_monkey():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
