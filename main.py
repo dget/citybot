@@ -5,8 +5,8 @@ import twilio.twiml
 app = Flask(__name__)
 
 answer_dict =	{
-								"Hi, How Are You": "Thanks for checking out Cheeky City Bot!",
-								"Where Am I": "Code for America Office!",
+								"Hi, how are you": "Thanks for checking out Cheeky City Bot!",
+								"Where m i": "Code for America Office!",
 								"Set my alarm": "Sorry, I'm not Siri"
 							};
 
@@ -18,7 +18,7 @@ def hello_monkey():
     resp = twilio.twiml.Response()
     resp_msg = "Sorry, I don't have any information!"
     if answer_dict.has_key(rcv_msg) :
-    	resp_msg = dict[rcv_msg]
+    	resp_msg = answer_dict[rcv_msg]
 
     resp.message(resp_msg)
     return str(resp)
