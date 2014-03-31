@@ -18,7 +18,7 @@ def respond_to_question():
     if "where" in rcv_msg and "taco" in rcv_msg:
         location = match(r".+in\s+(.+)", rcv_msg).group(1)
         key = "schmows"
-        go_find_taco(location, key)
+        resp_msg = go_find_taco(location, key)
 
     resp = twilio.twiml.Response()
     resp_msg = "Sorry, I don't have any information!"
@@ -30,6 +30,10 @@ def respond_to_question():
 
 def go_find_taco(location, key):
     geocode_url = u"https://maps.googleapis.com/maps/api/geocode/json?&address=%skey=%s&sensor=false" % (location, key)
+    resp_json = get(geocode_url).json()
+    return resp_json
+
+    
  
 if __name__ == "__main__":
     app.run(debug=True)
