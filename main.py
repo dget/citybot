@@ -16,7 +16,7 @@ def respond_to_question():
     """Respond to text questions with an answer."""
     rcv_msg = request.values.get('Body', None).lower()
     if "where" in rcv_msg and "taco" in rcv_msg:
-        location = re.match("in\s+(.+)").group(1)
+        location = match(r".+in\s+(.+)", rcv_msg).group(1)
         key = "schmows"
         go_find_taco(location, key)
 
@@ -29,8 +29,7 @@ def respond_to_question():
     return str(resp)
 
 def go_find_taco(location, key):
-    geocode_url =
-u"https://maps.googleapis.com/maps/api/geocode/json?&address=%skey=%s&sensor=false" % (location, key)
+    geocode_url = u"https://maps.googleapis.com/maps/api/geocode/json?&address=%skey=%s&sensor=false" % (location, key)
  
 if __name__ == "__main__":
     app.run(debug=True)
