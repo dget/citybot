@@ -5,10 +5,10 @@ import twilio.twiml
 app = Flask(__name__)
 
 answer_dict =	{
-								"hi"							:	"Thanks for checking out Cheeky City Bot!",
-								"where am i"			:	"Code for America Office!",
-								"set my alarm"		: "Sorry, I'm not Siri"
-							};
+                    "hi"            :   "Thanks for checking out Cheeky City Bot!",
+                    "where am i"    :   "Code for America Office!",
+					"set my alarm"  :   "Sorry, I'm not Siri"
+				};
 
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
