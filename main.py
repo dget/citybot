@@ -1,6 +1,7 @@
 from flask import Flask, request
 import twilio.twiml
 from requests import get
+from re import match
 
 app = Flask(__name__)
 
@@ -10,14 +11,15 @@ answer_dict =   {
                     "set my alarm"  :   "Sorry, I'm not Siri"
                 };
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET', 'POST'])
 def respond_to_question():
-    """Respond to incoming calls with a simple text message."""
+    """Respond to text questions with an answer."""
     rcv_msg = request.values.get('Body', None).lower()
-    if "where" in rcv_msg and "taco" in rcv_msg
-        location =
+    if "where" in rcv_msg and "taco" in rcv_msg:
+        location = re.match("in\s+(.+)").group(1)
         key = "schmows"
-        go_find_taco(, key)
+        go_find_taco(location, key)
+
     resp = twilio.twiml.Response()
     resp_msg = "Sorry, I don't have any information!"
     if rcv_msg in answer_dict:
@@ -26,10 +28,9 @@ def respond_to_question():
     resp.message(resp_msg)
     return str(resp)
 
-
-def go_find_taco(address, key):
+def go_find_taco(location, key):
     geocode_url =
-u"https://maps.googleapis.com/maps/api/geocode/json?&address=%skey=%s&sensor=false" % (address, key)
-
+u"https://maps.googleapis.com/maps/api/geocode/json?&address=%skey=%s&sensor=false" % (location, key)
+ 
 if __name__ == "__main__":
     app.run(debug=True)
