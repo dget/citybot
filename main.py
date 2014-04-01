@@ -6,10 +6,13 @@ import cgi
 import os
 import json
 import random
+from fuzzywuzzy import process
 
 app = Flask(__name__)
 
 answer_dict = json.load(open('questions.json'))
+
+FUZZ_THRESHOLD = 80
 
 @app.route("/", methods=['GET', 'POST'])
 def respond_to_question():
@@ -20,8 +23,12 @@ def respond_to_question():
         resp_msg = go_find_taco(location)
     else:
         resp_msg = "Sorry, I don't have any information!"
-        if rcv_msg in answer_dict:
-            resp_msg_arr = answer_dict[rcv_msg]
+
+        # Fuzzily match against questions
+        top_question, top_score = process.extractOne(rcv_msg, answer_dict.keys())
+
+        if top_score > FUZZ_THRESHOLD:
+            resp_msg_arr = answer_dict[top_question]
             index = random.randint(0,len(resp_msg_arr) - 1)
             resp_msg = resp_msg_arr[index]
 
