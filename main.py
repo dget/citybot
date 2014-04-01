@@ -4,14 +4,11 @@ from requests import get
 from re import match
 import cgi
 import os
+import json
 
 app = Flask(__name__)
 
-answer_dict =   {
-                    "hi"            :   "Thanks for checking out Cheeky City Bot!",
-                    "where am i"    :   "Code for America Office!",
-                    "set my alarm"  :   "Sorry, I'm not Siri"
-                };
+answer_dict = json.load(open('questions.json'))
 
 @app.route("/", methods=['GET', 'POST'])
 def respond_to_question():
