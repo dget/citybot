@@ -28,7 +28,7 @@ def respond_to_question():
 
 def go_find_taco(location):
     location = cgi.escape(location)
-    geocode_url = u"https://maps.googleapis.com/maps/api/geocode/json?&address=%s&key=%s&sensor=false" % (location, os.environ["GOOGLE_MAPS_KEY"])
+    geocode_url = u"https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s&sensor=false" % (location, os.environ["GOOGLE_MAPS_KEY"])
     resp_json = get(geocode_url).json()
 
     coords = resp_json['results'][0]['geometry']['location']
@@ -38,7 +38,13 @@ def go_find_taco(location):
     # Get specific food options based on coordinates
     # geocode_url
 
-    return resp_json
+    restaurant_url = u"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=500000&types=food&name=taco&sensor=false&key=%s" % (lat, lng, os.environ["GOOGLE_PLACES_KEY"])
+    restaurant_json = get(restaurant_url).json()
+
+    restaurant_name = restaurant_json['results'][0]['name'];
+    vicinity = restaurant_json['results'][0]['vicinity'];
+
+    return "go to here: " + restaurant_name + " " + vicinity
     
  
 if __name__ == "__main__":
