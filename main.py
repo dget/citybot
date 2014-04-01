@@ -5,6 +5,7 @@ from re import match
 import cgi
 import os
 import json
+import random
 
 app = Flask(__name__)
 
@@ -20,7 +21,9 @@ def respond_to_question():
     else:
         resp_msg = "Sorry, I don't have any information!"
         if rcv_msg in answer_dict:
-            resp_msg = answer_dict[rcv_msg]
+            resp_msg_arr = answer_dict[rcv_msg]
+            index = random.randint(0,len(resp_msg_arr) - 1)
+            resp_msg = resp_msg_arr[index]
 
     resp = twilio.twiml.Response()
     resp.message(resp_msg)
