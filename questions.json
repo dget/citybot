@@ -1,5 +1,8 @@
 {
-    "hi"            :   ["Thanks for checking out Cheeky City Bot!", "Hey there!", "Hi"],
-    "where am i"    :   ["Code for America Office!"],
-    "set my alarm"  :   ["Sorry, I'm not Siri"]
+    "hi" : ["Call me Tiz.", "Usually people bring pie when they visit someone. Just sayin'."],
+    "where’s the nearest dog park?"    :   ["Here’s a park. Make it a dog park: 566 Dolores St, San Francisco, CA 94110"],
+    "when is my trash pickup?"  :   ["It’s on Tuesday, good cuz those pizza boxes won’t recycle themselves."],
+    "when do they sweep my street?"  :   ["Tuesday, my hamster's wedding anniversary.", "Tuesday. I’ll be eating pizza", "Tuesday. I’ve got a date with seven pancakes."],
+    "when’s my next bus?"  :   ["8am, enough time to eat a hot dog.", "8am, put your running shoes on.", "8am, but you should probably wait for the next one."],
+    "help": ["I'm the one who needs the help. Ok, ask me about buses, trash, or tacos. If this is an emergency hang up and call 911."]
 }

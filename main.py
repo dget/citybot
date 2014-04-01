@@ -10,16 +10,19 @@ import random
 app = Flask(__name__)
 
 answer_dict = json.load(open('questions.json'))
+random_answers = ["What the what?", "Nerds!", "Blerg!"]
 
 @app.route("/", methods=['GET', 'POST'])
 def respond_to_question():
     """Respond to text questions with an answer."""
     rcv_msg = request.values.get('Body', None).lower()
-    if "where" in rcv_msg and "taco" in rcv_msg:
-        location = match(r".+in\s+(.+)", rcv_msg).group(1)
+    if "taco" in rcv_msg and "near" in rcv_msg:
+        location = match(r".+near\s+(.+)", rcv_msg).group(1)
         resp_msg = go_find_taco(location)
     else:
-        resp_msg = "Sorry, I don't have any information!"
+        random_index = random.randint(0,len(random_answers) - 1)
+        resp_msg = random_answers[random_index]
+
         if rcv_msg in answer_dict:
             resp_msg_arr = answer_dict[rcv_msg]
             index = random.randint(0,len(resp_msg_arr) - 1)
@@ -45,7 +48,7 @@ def go_find_taco(location):
     restaurant_name = restaurant_json['results'][0]['name'];
     vicinity = restaurant_json['results'][0]['vicinity'];
 
-    return "go to here: " + restaurant_name + " " + vicinity
+    return "Here's where I go on hungry nights: " + restaurant_name + " @ " + vicinity
     
  
 if __name__ == "__main__":
