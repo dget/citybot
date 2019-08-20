@@ -6,7 +6,7 @@ fuzzywuzzy==0.2
 gunicorn==18.0
 httplib2==0.8
 itsdangerous==0.24
-requests==1.2.3
+requests==2.20.0
 six==1.6.1
 twilio==3.6.6
 wsgiref==0.1.2
